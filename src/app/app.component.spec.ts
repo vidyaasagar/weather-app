@@ -1,4 +1,8 @@
 import { TestBed, async } from '@angular/core/testing';
+import { MaterialModule } from './material.module';
+import { MatCardModule } from '@angular/material';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppComponent } from './app.component';
 import { CurrentWeatherComponent } from './current-weather/current-weather.component';
 import { WeatherService } from '././weather/weather.service';
@@ -11,6 +15,7 @@ describe('AppComponent', () => {
         AppComponent,
         CurrentWeatherComponent
       ],
+      imports: [MaterialModule, MatCardModule, NoopAnimationsModule],
       providers: [{ provide: WeatherService, useClass: WeatherServiceFake }]
     }).compileComponents();
   }));
@@ -19,10 +24,10 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
-  it('should render title in a h1 tag', async(() => {
+  it('should render title in a span tag', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Local Weather');
+    expect(compiled.querySelector('span').textContent).toContain('LocalCast Weather');
   }));
 });
